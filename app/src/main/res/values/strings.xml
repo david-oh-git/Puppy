@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Puppy</string>
+    <string name="puppy_app_icon_desc">Puppy app icon</string>
 </resources>

@@ -28,7 +28,10 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun PuppyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+fun PuppyTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable() () -> Unit
+) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
@@ -37,8 +40,8 @@ fun PuppyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable(
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
-        shapes = Shapes,
+        typography = PuppyTypography,
+        shapes = PuppyShapes,
         content = content
     )
 }

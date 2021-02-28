@@ -3,6 +3,12 @@ import io.davidosemwota.puppy.buildsource.Libs
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
 }
 
 android {
@@ -19,13 +25,32 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    packagingOptions {
+        exclude "/*.jar"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile rootProject.file('debug.keystore.jks')
+            storePassword 'android'
+            keyAlias 'android'
+            keyPassword 'android'
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
+        // Enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -54,4 +79,6 @@ dependencies {
     testImplementation Libs.JUnit.junit
     androidTestImplementation Libs.AndroidX.Test.Ext.junit
     androidTestImplementation Libs.AndroidX.Test.espressoCore
+
+    coreLibraryDesugaring Libs.jdkDesugar
 }

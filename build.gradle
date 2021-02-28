@@ -5,7 +5,6 @@ import io.davidosemwota.puppy.buildsource.BuildPlugins
 apply plugin: BuildPlugins.benManes
 
 buildscript {
-
     repositories {
         google()
         mavenCentral()
@@ -23,8 +22,28 @@ buildscript {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+subprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+            // Treat all Kotlin warnings as errors
+//            allWarningsAsErrors = true
+
+            freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
+
+            // Enable experimental coroutines APIs, including Flow
+            freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi'
+            freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.FlowPreview'
+            freeCompilerArgs += '-Xopt-in=kotlin.Experimental'
+
+            // Set JVM target to 1.8
+            jvmTarget = "1.8"
+        }
+    }
 }
 
 tasks.named("dependencyUpdates").configure {
