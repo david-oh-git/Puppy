@@ -1,0 +1,45 @@
+
+import io.davidosemwota.puppy.buildsource.Libs
+import io.davidosemwota.puppy.buildsource.BuildPlugins
+
+apply plugin: BuildPlugins.benManes
+
+buildscript {
+
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath Libs.androidGradlePlugin
+        classpath Libs.Kotlin.gradlePlugin
+        classpath Libs.benManesUpdatePlugin
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+tasks.named("dependencyUpdates").configure {
+
+    checkForGradleUpdate = true
+    outputFormatter = "html"
+    outputDir = "build/dependencyUpdates"
+    reportfileName = "report"
+
+    // Example 3: using the full syntax
+    resolutionStrategy {
+        componentSelection {
+            all {
+
+            }
+        }
+    }
+}
