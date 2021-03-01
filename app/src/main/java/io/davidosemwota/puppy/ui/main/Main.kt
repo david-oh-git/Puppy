@@ -3,10 +3,9 @@ package io.davidosemwota.puppy.ui.main
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -21,6 +20,8 @@ import io.davidosemwota.puppy.R
 import io.davidosemwota.puppy.data.Pup
 import io.davidosemwota.puppy.ui.theme.PuppyTheme
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun Main() {
@@ -29,7 +30,7 @@ fun Main() {
 
     Surface(Modifier.fillMaxSize()) {
         MainScreen(
-
+            viewState.puppies
         )
     }
 }
@@ -63,6 +64,7 @@ fun MainAppBar(
 
 @Composable
 fun MainScreen(
+    puppies: List<Pup>,
     modifier: Modifier = Modifier
 ) {
     val appBarColor = MaterialTheme.colors.surface.copy(alpha = 0.87f)
@@ -79,33 +81,65 @@ fun MainScreen(
             backgroundColor = appBarColor,
             modifier = Modifier.fillMaxWidth()
         )
+
+        PuppiesList(
+            puppies = puppies,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 
+}
+
+@Composable
+fun PuppiesList(
+    puppies: List<Pup>,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
+        contentPadding = PaddingValues(all = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = modifier.fillMaxWidth()
+    ) {
+        items(puppies) { pup ->
+            PuppyItem(pup = pup)
+        }
+    }
 }
 
 @Composable
 fun PuppyItem(
     pup: Pup
 ) {
-    Column {
-        CoilImage(
-            data = pup.imageUrl,
-            contentDescription = stringResource(R.string.puppy_item_image_desc),
-            loading = {
+    Card(
+        elevation = 4.dp
+    ) {
+        Column {
+            CoilImage(
+                data = pup.imageUrl,
+                contentDescription = stringResource(R.string.puppy_item_image_desc),
+                loading = {
 
-            },
-            error = {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_broken_image),
-                    contentDescription = stringResource(R.string.broken_image_desc)
-                )
-            }
-        )
-        Text(
-            text = pup.name,
-            style = MaterialTheme.typography.h3
-        )
+                },
+                error = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_broken_image),
+                        contentDescription = stringResource(R.string.broken_image_desc)
+                    )
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+                    .clip(MaterialTheme.shapes.medium)
+            )
+            Text(
+                text = pup.name,
+                style = MaterialTheme.typography.h6,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
+
 }
 
 @Composable
