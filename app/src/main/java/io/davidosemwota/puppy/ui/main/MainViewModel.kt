@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class MainViewModel(
-    private val dataSource: DataSource = DataSource
+    dataSource: DataSource = DataSource
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(MainViewState())
@@ -15,7 +15,7 @@ class MainViewModel(
         get() = _state
 
     init {
-        _state.value = MainViewState(dataSource.getAllPups())
+        _state.value = MainViewState(dataSource.puppies)
     }
 }
 

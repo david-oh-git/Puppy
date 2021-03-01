@@ -62,7 +62,7 @@ object Libs {
         const val appcompat = "androidx.appcompat:appcompat:1.2.0"
         const val palette = "androidx.palette:palette:1.0.0"
 
-        const val coreKtx = "androidx.core:core-ktx:1.5.0-beta01"
+        const val coreKtx = "androidx.core:core-ktx:1.5.0-beta02"
 
         object Activity {
             const val activityCompose = "androidx.activity:activity-compose:1.3.0-alpha03"
@@ -89,6 +89,8 @@ object Libs {
             const val materialIconsExtended = "androidx.compose.material:material-icons-extended:$version"
 
             const val tooling = "androidx.compose.ui:ui-tooling:$version"
+            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha08"
+
         }
 
         object Lifecycle {

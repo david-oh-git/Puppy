@@ -3,7 +3,8 @@ package io.davidosemwota.puppy
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import io.davidosemwota.puppy.ui.main.Main
+import androidx.core.view.WindowCompat
+import io.davidosemwota.puppy.ui.PuppyApp
 import io.davidosemwota.puppy.ui.theme.PuppyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -11,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PuppyTheme {
-                Main()
+                PuppyApp()
             }
         }
     }

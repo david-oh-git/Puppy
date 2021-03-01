@@ -4,6 +4,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 kapt {
@@ -77,8 +78,10 @@ dependencies {
     implementation Libs.AndroidX.Lifecycle.runtime
     implementation Libs.AndroidX.Activity.activityCompose
     implementation Libs.Accompanist.coil
+    implementation Libs.Accompanist.insets
     implementation Libs.AndroidX.Lifecycle.viewmodel
     implementation Libs.AndroidX.Lifecycle.viewModelCompose
+    implementation Libs.AndroidX.Compose.navigation
 
     testImplementation Libs.JUnit.junit
     androidTestImplementation Libs.AndroidX.Test.Ext.junit
