@@ -77,6 +77,8 @@ dependencies {
     implementation Libs.AndroidX.Lifecycle.runtime
     implementation Libs.AndroidX.Activity.activityCompose
     implementation Libs.Accompanist.coil
+    implementation Libs.AndroidX.Lifecycle.viewmodel
+    implementation Libs.AndroidX.Lifecycle.viewModelCompose
 
     testImplementation Libs.JUnit.junit
     androidTestImplementation Libs.AndroidX.Test.Ext.junit
